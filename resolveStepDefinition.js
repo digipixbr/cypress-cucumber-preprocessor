@@ -45,6 +45,14 @@ class StepDefinitionRegistry {
 const stepDefinitionRegistry = new StepDefinitionRegistry();
 
 function resolveStepDefinition(step) {
+  if (step.keyword === "Dado ") {
+    Object.assign(step, { keyword: "Given " });
+  } else if (step.keyword === "Quando ") {
+    Object.assign(step, { keyword: "When " });
+  } else if (step.keyword === "Então ") {
+    Object.assign(step, { keyword: "Then " });
+  }
+
   const stepDefinition = stepDefinitionRegistry.resolve(
     step.keyword.toLowerCase().trim(),
     step.text
