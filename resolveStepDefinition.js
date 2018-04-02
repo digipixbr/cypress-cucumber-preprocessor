@@ -51,6 +51,14 @@ function resolveStepDefinition(step) {
     Object.assign(step, { keyword: "When " });
   } else if (step.keyword === "Então ") {
     Object.assign(step, { keyword: "Then " });
+  } else if (step.keyword === "E ") {
+    Object.assign(
+      step,
+      {
+        keyword: `${stepDefinitionRegistry.latestType} `
+          .replace(/(?:^|\s)\S/g, a => a.toUpperCase())
+      }
+    );
   }
 
   const stepDefinition = stepDefinitionRegistry.resolve(
